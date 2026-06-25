@@ -11,21 +11,24 @@ the host, and binds to `0.0.0.0`. Below is the easiest path that gives you an
 
 ---
 
-## Option A — Render (recommended, free, has a blueprint)
+## Option A — Render, one click (recommended, free)
 
-You can do this entirely from your phone's browser.
+The simplest path, doable entirely from your phone:
 
-1. Go to **https://dashboard.render.com** and sign in with **GitHub**
-   (authorize access to the `new-projekt` repository).
-2. Tap **New +** → **Blueprint**.
-3. Select the repo **`pubgpc078-hub/new-projekt`**.
-4. Choose the branch **`claude/ecommerce-enterprise-system-4vrlcs`**.
-   Render reads `render.yaml` automatically (free plan, Node, health check,
-   auto-generated `JWT_SECRET`, auto-seed on).
-5. Tap **Apply** / **Create**. Wait ~2–3 minutes for the build.
-6. Open the URL Render gives you, e.g. `https://manojan-kala.onrender.com`.
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/pubgpc078-hub/new-projekt)
+
+1. Tap the **Deploy to Render** button above.
+2. Sign in with **GitHub** and authorize access to the repository.
+3. Render auto-detects `render.yaml` (free plan, auto-generated `JWT_SECRET`,
+   auto-seed). Tap **Apply** / **Create**.
+4. Wait ~2–3 minutes, then open the URL it gives you
+   (e.g. `https://manojan-kala.onrender.com`).
 
 Admin login: `admin@manojankala.com` / `Admin@12345`.
+
+> The button reads `render.yaml` from the repo's **main** branch. If you ever
+> prefer the manual route: Render dashboard → **New +** → **Blueprint** →
+> pick the repo → **Apply**.
 
 > Free tier sleeps after ~15 min idle; the first request then takes ~30–50s to
 > wake. The database is ephemeral, so it re-seeds the demo catalogue on each

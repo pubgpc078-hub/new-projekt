@@ -90,11 +90,18 @@ Run `npm run reset` to wipe and re-seed the database.
 
 ## ☁️ Deploy (view it on your phone)
 
+**One-click deploy → get a public `https://` link you can open on any phone:**
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/pubgpc078-hub/new-projekt)
+
+Tap the button, sign in with GitHub, then **Apply** — Render reads
+`render.yaml` (free plan, auto-generated `JWT_SECRET`, auto-seeded demo data)
+and gives you a live URL in ~2–3 minutes. Admin login:
+`admin@manojankala.com` / `Admin@12345`.
+
 The app is deploy-ready: it auto-seeds on first boot (`AUTO_SEED=true`), reads
-`PORT` from the host and binds `0.0.0.0`. The quickest way to get a public
-`https://` link you can open on a phone is **Render** (free, blueprint
-included) — or Railway/Docker. Full step-by-step (doable from a phone) is in
-[`DEPLOY.md`](DEPLOY.md).
+`PORT` from the host and binds `0.0.0.0`. Railway/Docker/local options and a
+full step-by-step (doable entirely from a phone) are in [`DEPLOY.md`](DEPLOY.md).
 
 ```bash
 # Or run as a container anywhere:
