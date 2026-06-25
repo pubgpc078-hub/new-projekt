@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فروشگاه محصولات | منوجان کالا</title>
+  <meta name="description" content="مرور و خرید همه محصولات لوازم خانگی منوجان کالا با فیلتر قیمت، برند و دسته‌بندی.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div data-app-header></div>
+
+  <div class="container page-head">
+    <nav class="breadcrumb"><a href="/index.html">خانه</a> / <span data-crumb>فروشگاه</span></nav>
+    <h1 data-title>همه محصولات</h1>
+  </div>
+
+  <div class="container section" style="padding-block:24px">
+    <div class="catalog">
+      <!-- Filters -->
+      <aside class="filters">
+        <div class="filter-group">
+          <h4>دسته‌بندی</h4>
+          <div data-filter-categories><div class="skeleton" style="height:120px"></div></div>
+        </div>
+        <div class="filter-group">
+          <h4>برند</h4>
+          <div data-filter-brands></div>
+        </div>
+        <div class="filter-group">
+          <h4>محدوده قیمت (تومان)</h4>
+          <div class="price-inputs">
+            <input type="number" placeholder="از" data-min-price aria-label="حداقل قیمت">
+            <input type="number" placeholder="تا" data-max-price aria-label="حداکثر قیمت">
+          </div>
+          <button class="btn btn-ghost btn-sm btn-block" style="margin-top:12px" data-apply-price>اعمال قیمت</button>
+        </div>
+        <button class="btn btn-primary btn-block" data-clear style="margin-top:16px">حذف فیلترها</button>
+      </aside>
+
+      <!-- Results -->
+      <div>
+        <div class="toolbar">
+          <span class="muted" data-result-count>در حال بارگذاری…</span>
+          <select data-sort aria-label="مرتب‌سازی">
+            <option value="newest">جدیدترین</option>
+            <option value="price_asc">ارزان‌ترین</option>
+            <option value="price_desc">گران‌ترین</option>
+            <option value="rating">بیشترین امتیاز</option>
+            <option value="popular">محبوب‌ترین</option>
+          </select>
+        </div>
+        <div class="grid product-grid" data-results>
+          <div class="skeleton sk-card"></div><div class="skeleton sk-card"></div>
+          <div class="skeleton sk-card"></div><div class="skeleton sk-card"></div>
+        </div>
+        <div class="pagination" data-pagination></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-app-footer></div>
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/products.js"></script>
+</body>
+</html>

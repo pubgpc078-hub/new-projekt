@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پنل مدیریت | منوجان کالا</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div data-app-header></div>
+
+  <div class="container" data-admin-guard>
+    <div class="skeleton" style="height:400px;margin:40px 0"></div>
+  </div>
+
+  <div class="container hidden" data-admin-root>
+    <div class="admin-shell">
+      <aside class="dash-nav admin-sidebar">
+        <h3 style="padding:8px 14px;font-size:.9rem">پنل مدیریت</h3>
+        <button class="active" data-view="overview">📊 داشبورد</button>
+        <button data-view="products">📦 محصولات</button>
+        <button data-view="orders">🧾 سفارش‌ها</button>
+        <button data-view="categories">🗂️ دسته‌بندی‌ها</button>
+        <button data-view="coupons">🏷️ کدهای تخفیف</button>
+        <button data-view="inventory">📉 موجودی انبار</button>
+        <button data-view="users">👥 کاربران</button>
+        <a href="/index.html" class="btn btn-ghost btn-sm btn-block" style="margin-top:12px">↩ بازگشت به سایت</a>
+      </aside>
+      <main data-admin-panel></main>
+    </div>
+  </div>
+
+  <!-- Modal host -->
+  <div class="modal-overlay hidden" data-modal>
+    <div class="modal-box" data-modal-box></div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

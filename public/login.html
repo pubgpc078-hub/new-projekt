@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ورود / ثبت‌نام | منوجان کالا</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div data-app-header></div>
+  <div class="container">
+    <div class="auth-wrap">
+      <div class="form-card">
+        <div class="tabs">
+          <button class="active" data-tab="login">ورود</button>
+          <button data-tab="register">ثبت‌نام</button>
+        </div>
+
+        <form data-login-form>
+          <div class="field"><label>ایمیل</label><input name="email" type="email" placeholder="you@example.com" required></div>
+          <div class="field"><label>رمز عبور</label><input name="password" type="password" placeholder="••••••••" required></div>
+          <div class="field err" data-login-err style="display:none"></div>
+          <button class="btn btn-primary btn-block btn-lg" type="submit">ورود به حساب</button>
+          <p class="muted" style="font-size:.82rem;text-align:center;margin-top:14px">حساب آزمایشی مدیر: admin@manojankala.com / Admin@12345</p>
+        </form>
+
+        <form data-register-form class="hidden">
+          <div class="field"><label>نام و نام خانوادگی</label><input name="name" required></div>
+          <div class="field"><label>ایمیل</label><input name="email" type="email" required></div>
+          <div class="field"><label>شماره تماس</label><input name="phone" placeholder="اختیاری"></div>
+          <div class="field"><label>رمز عبور</label><input name="password" type="password" placeholder="حداقل ۸ کاراکتر" required></div>
+          <div class="field err" data-register-err style="display:none"></div>
+          <button class="btn btn-primary btn-block btn-lg" type="submit">ایجاد حساب</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div data-app-footer></div>
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+</html>

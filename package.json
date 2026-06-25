@@ -1,0 +1,42 @@
+{
+  "name": "manojan-kala",
+  "version": "1.0.0",
+  "description": "Enterprise-grade home-appliances e-commerce platform (Frontend + Admin + REST API + n8n automation)",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node server/db/seed.js",
+    "reset": "node server/db/seed.js --reset",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:41729/git/pubgpc078-hub/new-projekt"
+  },
+  "keywords": [
+    "ecommerce",
+    "express",
+    "sqlite",
+    "rest-api",
+    "n8n",
+    "home-appliances"
+  ],
+  "author": "Manojan Kala Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.11.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3"
+  }
+}
