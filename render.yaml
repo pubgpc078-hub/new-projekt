@@ -1,0 +1,24 @@
+# Render.com blueprint — one deploy gives a public HTTPS URL (phone-friendly).
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: manojan-kala
+    env: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: node server/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Seed demo catalogue + admin on first boot (DB is ephemeral on free tier).
+      - key: AUTO_SEED
+        value: "true"
+      # A strong secret is generated automatically by Render.
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SEED_ADMIN_EMAIL
+        value: admin@manojankala.com
+      - key: SEED_ADMIN_PASSWORD
+        value: Admin@12345

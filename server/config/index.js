@@ -41,6 +41,9 @@ const config = {
     path: path.isAbsolute(process.env.DB_PATH || '')
       ? process.env.DB_PATH
       : path.join(root, process.env.DB_PATH || 'data/manojan_kala.db'),
+    // When true, the server seeds demo data on boot if the catalogue is empty.
+    // Handy for zero-config cloud deploys (Render/Railway/etc.).
+    autoSeed: bool(process.env.AUTO_SEED, false),
   },
 
   auth: {

@@ -155,7 +155,18 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 /* ── Boot ──────────────────────────────────────────────────────────── */
-if (require.main === module) {
+async function start() {
+  // Zero-config deploys: seed demo data on first boot when AUTO_SEED is set.
+  if (config.db.autoSeed) {
+    try {
+      const seed = require('./db/seed');
+      const seeded = await seed(false);
+      if (seeded) logger.info('Auto-seed completed (empty database detected)');
+    } catch (err) {
+      logger.error('Auto-seed failed', { error: err.message });
+    }
+  }
+
   const server = app.listen(config.server.port, config.server.host, () => {
     logger.info('Manojan Kala server started', {
       url: `http://${config.server.host}:${config.server.port}`,
@@ -171,6 +182,15 @@ if (require.main === module) {
   };
   process.on('SIGTERM', () => shutdown('SIGTERM'));
   process.on('SIGINT', () => shutdown('SIGINT'));
+
+  return server;
+}
+
+if (require.main === module) {
+  start().catch((err) => {
+    logger.error('Fatal startup error', { error: err.message, stack: err.stack });
+    process.exit(1);
+  });
 }
 
 module.exports = app;

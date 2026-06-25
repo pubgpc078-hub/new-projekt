@@ -88,6 +88,21 @@ Run `npm run reset` to wipe and re-seed the database.
 
 ---
 
+## ☁️ Deploy (view it on your phone)
+
+The app is deploy-ready: it auto-seeds on first boot (`AUTO_SEED=true`), reads
+`PORT` from the host and binds `0.0.0.0`. The quickest way to get a public
+`https://` link you can open on a phone is **Render** (free, blueprint
+included) — or Railway/Docker. Full step-by-step (doable from a phone) is in
+[`DEPLOY.md`](DEPLOY.md).
+
+```bash
+# Or run as a container anywhere:
+docker build -t manojan-kala . && docker run -p 3000:3000 manojan-kala
+```
+
+---
+
 ## 🧪 Tests
 
 ```bash

@@ -172,13 +172,13 @@ function clearAll() {
   logger.info('Cleared all tables');
 }
 
-async function seed() {
-  if (RESET) clearAll();
+async function seed(reset = RESET) {
+  if (reset) clearAll();
 
   const existing = db.prepare('SELECT COUNT(*) AS c FROM products').get().c;
-  if (existing > 0 && !RESET) {
+  if (existing > 0 && !reset) {
     logger.info('Database already seeded — skipping (use npm run reset to rebuild)');
-    return;
+    return false;
   }
 
   // Bcrypt is async, but better-sqlite3 transactions must be synchronous —
@@ -284,11 +284,17 @@ async function seed() {
     coupons: coupons.length,
     admin: config.seed.adminEmail,
   });
+  return true;
 }
 
-seed()
-  .then(() => process.exit(0))
-  .catch((err) => {
-    logger.error('Seed failed', { error: err.message, stack: err.stack });
-    process.exit(1);
-  });
+module.exports = seed;
+
+// Run as a CLI when invoked directly (`npm run seed` / `npm run reset`).
+if (require.main === module) {
+  seed()
+    .then(() => process.exit(0))
+    .catch((err) => {
+      logger.error('Seed failed', { error: err.message, stack: err.stack });
+      process.exit(1);
+    });
+}
