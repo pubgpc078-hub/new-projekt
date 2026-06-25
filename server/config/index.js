@@ -70,6 +70,11 @@ const config = {
     lowStockThreshold: int(process.env.LOW_STOCK_THRESHOLD, 5),
   },
 
+  telegram: {
+    botToken: process.env.TELEGRAM_BOT_TOKEN || '',
+    chatId: process.env.TELEGRAM_CHAT_ID || '',
+  },
+
   n8n: {
     enabled: bool(process.env.N8N_ENABLED, false),
     secret: process.env.N8N_WEBHOOK_SECRET || '',

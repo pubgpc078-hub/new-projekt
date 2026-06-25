@@ -5,6 +5,7 @@ const CouponModel = require('../models/couponModel');
 const { ProductModel } = require('../models/productModel');
 const { ApiError, asyncHandler } = require('../middleware/errors');
 const { automation } = require('../utils/n8n');
+const { notifyOrder } = require('../utils/telegram');
 const logger = require('../utils/logger');
 
 /** POST /api/orders — checkout. Works for guests and logged-in users. */
@@ -38,6 +39,10 @@ const createOrder = asyncHandler(async (req, res) => {
   });
 
   for (const product of order.lowStock || []) automation.lowStock(product);
+
+  // ── Direct Telegram notification (fire-and-forget) ──
+  // Pushes the order straight to the shop owner's phone in real time.
+  notifyOrder(order);
 
   const { lowStock, ...payload } = order; // don't leak internal stock state to the client
   res.status(201).json({ order: payload });
