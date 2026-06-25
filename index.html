@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منوجان کالا | دموی آفلاین</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+<style>
+/* ── Design tokens ── */
+:root{
+  --brand:#b8860b;--brand-dark:#8a6508;--brand-soft:#f5ecd5;--accent:#0f766e;
+  --bg:#faf9f7;--bg-elevated:#fff;--bg-muted:#f1efea;--text:#1a1714;--text-muted:#6b645c;--border:#e7e2da;
+  --shadow-sm:0 1px 3px rgba(26,23,20,.08);--shadow-md:0 4px 10px rgba(26,23,20,.10);--shadow-lg:0 20px 40px rgba(26,23,20,.16);
+  --success:#15803d;--danger:#b91c1c;--radius-sm:8px;--radius:14px;--radius-lg:22px;
+  --font:'Vazirmatn',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;--transition:220ms cubic-bezier(.4,0,.2,1);--header-h:64px;
+}
+[data-theme="dark"]{
+  --bg:#14110d;--bg-elevated:#1d1812;--bg-muted:#241e17;--text:#f3efe8;--text-muted:#a89f93;--border:#322a20;--brand-soft:#2a2113;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.4);--shadow-md:0 4px 10px rgba(0,0,0,.45);--shadow-lg:0 20px 40px rgba(0,0,0,.55);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh;transition:background .25s,color .25s;overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}ul{list-style:none}
+input{font-family:inherit;font-size:1rem}
+.container{width:100%;max-width:1180px;margin-inline:auto;padding-inline:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:var(--radius-sm);font-weight:700;font-size:.95rem;transition:var(--transition);border:1.5px solid transparent;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;box-shadow:var(--shadow-sm)}
+.btn-primary:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.btn-ghost{background:var(--bg-elevated);color:var(--text);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
+.btn-lg{padding:15px 30px;font-size:1.05rem}.btn-block{width:100%}.btn-sm{padding:8px 14px;font-size:.85rem}
+.muted{color:var(--text-muted)}.hidden{display:none!important}
+
+/* ── Header ── */
+.site-header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg-elevated) 90%,transparent);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.header-inner{height:var(--header-h);display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:1.15rem}
+.logo .mark{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff}
+.logo b{color:var(--brand)}
+.search{position:relative;flex:1;max-width:380px}
+.search input{width:100%;padding:10px 38px 10px 14px;border-radius:999px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);transition:var(--transition)}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
+.search .si{position:absolute;inset-inline-start:13px;top:50%;transform:translateY(-50%);color:var(--text-muted)}
+.h-actions{margin-inline-start:auto;display:flex;align-items:center;gap:6px}
+.icon-btn{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;transition:var(--transition);position:relative}
+.icon-btn:hover{background:var(--bg-muted)}.icon-btn svg{width:21px;height:21px}
+.cart-badge{position:absolute;top:-2px;inset-inline-end:-2px;min-width:18px;height:18px;padding:0 5px;background:var(--brand);color:#fff;border-radius:999px;font-size:.68rem;font-weight:800;display:grid;place-items:center}
+[data-theme="dark"] .i-sun{display:none}[data-theme="light"] .i-moon{display:none}
+
+/* ── Hero ── */
+.hero{background:radial-gradient(800px 440px at 85% -10%,var(--brand-soft),transparent 60%),radial-gradient(600px 440px at 0 110%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 55%)}
+.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;padding-block:54px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--bg-elevated);border:1px solid var(--border);font-size:.8rem;font-weight:700;color:var(--brand);margin-bottom:18px}
+.hero h1{font-size:clamp(2rem,5vw,3.3rem);font-weight:900;line-height:1.15;letter-spacing:-.03em;margin-bottom:16px}
+.hero h1 .grad{background:linear-gradient(120deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.08rem;color:var(--text-muted);max-width:44ch;margin-bottom:26px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:30px;margin-top:38px}
+.hero-stats .num{font-size:1.6rem;font-weight:900;color:var(--brand)}.hero-stats .lbl{font-size:.82rem;color:var(--text-muted)}
+.hero-card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden;transform:rotate(-2deg);transition:var(--transition)}
+.hero-card:hover{transform:rotate(0)}.hero-card img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.hero-card .hc{padding:16px 18px}.hero-card .tag{color:var(--accent);font-weight:700;font-size:.8rem}
+
+/* ── Sections ── */
+.section{padding-block:48px}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:26px;gap:14px;flex-wrap:wrap}
+.section-head h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;letter-spacing:-.02em}
+.section-head p{color:var(--text-muted);font-size:.92rem}
+.grid{display:grid;gap:18px}
+.cat-grid{grid-template-columns:repeat(6,1fr)}
+.cat-tile{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 12px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);transition:var(--transition);text-align:center;cursor:pointer}
+.cat-tile:hover,.cat-tile.active{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--brand)}
+.cat-tile.active{background:var(--brand-soft)}
+.cat-icon{font-size:1.7rem;width:58px;height:58px;border-radius:16px;display:grid;place-items:center;background:var(--brand-soft)}
+.cat-name{font-weight:700;font-size:.88rem}.cat-count{font-size:.74rem;color:var(--text-muted)}
+
+/* ── Product cards ── */
+.product-grid{grid-template-columns:repeat(4,1fr)}
+.product-card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column;cursor:pointer}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:color-mix(in srgb,var(--brand) 40%,var(--border))}
+.p-media{position:relative;aspect-ratio:1;overflow:hidden;background:var(--bg-muted)}
+.p-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.product-card:hover .p-media img{transform:scale(1.06)}
+.badge{position:absolute;top:10px;inset-inline-start:10px;z-index:2;padding:4px 10px;border-radius:999px;font-size:.7rem;font-weight:800;color:#fff;background:var(--danger)}
+.badge.trend{background:var(--accent);inset-inline-start:auto;inset-inline-end:10px}
+.p-body{padding:14px;display:flex;flex-direction:column;gap:5px;flex:1}
+.p-brand{font-size:.72rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.p-name{font-weight:700;font-size:.92rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}
+.p-rating{display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--text-muted)}.stars{color:var(--brand);letter-spacing:1px}
+.p-foot{margin-top:auto;padding-top:8px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.price{font-weight:900;font-size:1rem}.price-old{font-size:.78rem;color:var(--text-muted);text-decoration:line-through}
+.add-btn{width:40px;height:40px;border-radius:11px;background:var(--brand-soft);color:var(--brand-dark);display:grid;place-items:center;transition:var(--transition);flex-shrink:0}
+.add-btn:hover{background:var(--brand);color:#fff;transform:scale(1.08)}
+
+/* ── Promo ── */
+.promo{border-radius:var(--radius-lg);overflow:hidden;color:#fff;background:linear-gradient(120deg,var(--brand-dark),var(--brand) 55%,var(--accent));padding:44px 36px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+.promo h3{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;margin-bottom:8px}.promo p{opacity:.92}
+.promo .btn{background:#fff;color:var(--brand-dark)}
+.features{grid-template-columns:repeat(4,1fr)}
+.feature{display:flex;gap:12px;align-items:flex-start;padding:18px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius)}
+.feature .fi{width:44px;height:44px;border-radius:12px;background:var(--brand-soft);color:var(--brand-dark);display:grid;place-items:center;font-size:1.3rem;flex-shrink:0}
+.feature h4{font-size:.95rem;margin-bottom:2px}.feature p{font-size:.82rem;color:var(--text-muted)}
+
+/* ── Modal (product detail) ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:grid;place-items:center;padding:16px;backdrop-filter:blur(3px)}
+.modal{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);width:100%;max-width:860px;max-height:92vh;overflow-y:auto;animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:22px}
+.modal-img{aspect-ratio:1;border-radius:var(--radius);overflow:hidden;background:var(--bg-muted)}.modal-img img{width:100%;height:100%;object-fit:cover}
+.modal h2{font-size:1.4rem;font-weight:900;margin:6px 0 10px}
+.pdp-price{display:flex;align-items:baseline;gap:10px;margin:16px 0}.pdp-price .price{font-size:1.7rem}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:700;background:color-mix(in srgb,var(--success) 12%,transparent);color:var(--success)}
+.qty{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;width:fit-content;margin:16px 0}
+.qty button{width:40px;height:42px;font-size:1.2rem;font-weight:800}.qty button:hover{background:var(--bg-muted)}.qty span{width:48px;text-align:center;font-weight:800}
+.specs{width:100%;border-collapse:collapse;margin-top:14px}
+.specs td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:.88rem}.specs td:first-child{color:var(--text-muted);width:42%}.specs td:last-child{font-weight:700}
+.modal-close{position:sticky;top:0;float:inline-end;margin:10px;width:38px;height:38px;border-radius:10px;background:var(--bg-muted);display:grid;place-items:center;font-size:1.1rem;z-index:2}
+
+/* ── Cart drawer ── */
+.drawer-wrap{position:fixed;inset:0;z-index:1100;display:none}
+.drawer-wrap.open{display:block}
+.drawer-bg{position:absolute;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(2px)}
+.drawer{position:absolute;inset-inline-start:0;top:0;bottom:0;width:min(420px,90vw);background:var(--bg-elevated);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;animation:slide .25s ease}
+@keyframes slide{from{transform:translateX(-100%)}to{transform:none}}
+[dir="rtl"] .drawer{inset-inline-start:auto;inset-inline-end:0}
+[dir="rtl"] @keyframes slide{from{transform:translateX(100%)}}
+.drawer-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.drawer-head h3{font-size:1.15rem}
+.drawer-body{flex:1;overflow-y:auto;padding:16px 20px}
+.drawer-foot{border-top:1px solid var(--border);padding:18px 20px}
+.cart-item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:center}
+.cart-item img{width:64px;height:64px;border-radius:10px;object-fit:cover}
+.ci-name{font-weight:700;font-size:.88rem;margin-bottom:2px}.ci-meta{font-size:.8rem;color:var(--text-muted)}
+.ci-remove{color:var(--danger);font-size:.78rem;font-weight:600;margin-top:4px}
+.sum-row{display:flex;justify-content:space-between;padding-block:7px;font-size:.92rem}
+.sum-row.total{border-top:1.5px solid var(--border);margin-top:8px;padding-top:14px;font-size:1.15rem;font-weight:900}
+.empty{text-align:center;padding:50px 16px}.empty .emoji{font-size:3.4rem;margin-bottom:10px}
+
+/* ── Footer ── */
+.footer{background:var(--bg-elevated);border-top:1px solid var(--border);margin-top:36px;padding-block:30px;text-align:center;color:var(--text-muted);font-size:.86rem}
+
+/* ── Toast ── */
+.toast-host{position:fixed;bottom:20px;inset-inline-end:20px;display:flex;flex-direction:column;gap:8px;z-index:2000}
+.toast{background:var(--bg-elevated);border:1px solid var(--border);border-inline-start:4px solid var(--success);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);padding:12px 16px;font-size:.9rem;font-weight:600;animation:pop .3s ease;max-width:320px}
+
+@media(max-width:1080px){.product-grid{grid-template-columns:repeat(3,1fr)}.cat-grid{grid-template-columns:repeat(3,1fr)}.features{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.hero-inner{grid-template-columns:1fr}.hero-card{order:-1}.modal-grid{grid-template-columns:1fr}.search{display:none}}
+@media(max-width:560px){.product-grid{grid-template-columns:repeat(2,1fr)}.cat-grid{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:1fr}.promo{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#top"><span class="mark">م</span><span>منوجان<b>کالا</b></span></a>
+    <div class="search">
+      <span class="si"><svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+      <input id="search" type="search" placeholder="جستجوی محصولات…" autocomplete="off">
+    </div>
+    <div class="h-actions">
+      <button class="icon-btn" id="theme" title="تغییر تم">
+        <span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span>
+        <span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></span>
+      </button>
+      <button class="icon-btn" id="cart-btn" title="سبد خرید">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="cart-badge hidden" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow">✨ ضمانت اصالت + ارسال رایگان</span>
+      <h1>خانه‌ای <span class="grad">هوشمند و لوکس</span> با منوجان کالا</h1>
+      <p>بهترین برندهای لوازم خانگی دنیا را با قیمت رقابتی، گارانتی معتبر و تجربه خریدی در سطح جهانی تهیه کنید.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="#products">مشاهده فروشگاه</a>
+        <button class="btn btn-ghost btn-lg" onclick="filterFeatured()">پیشنهادهای ویژه</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="num">+۵۰۰</div><div class="lbl">محصول متنوع</div></div>
+        <div><div class="num">+۱۲هزار</div><div class="lbl">مشتری راضی</div></div>
+        <div><div class="num">۲۴ساعته</div><div class="lbl">پشتیبانی</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900&q=80" alt="آشپزخانه مدرن" loading="lazy">
+      <div class="hc"><span class="tag">پرفروش‌ترین این هفته</span><h3 style="font-size:1.1rem;margin-top:4px">کالکشن آشپزخانه حرفه‌ای</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="container" style="padding-block:32px">
+  <div class="grid features">
+    <div class="feature"><span class="fi">🚚</span><div><h4>ارسال سریع</h4><p>تحویل اکسپرس سراسر کشور</p></div></div>
+    <div class="feature"><span class="fi">🛡️</span><div><h4>ضمانت اصالت</h4><p>کالای اورجینال با گارانتی</p></div></div>
+    <div class="feature"><span class="fi">↩️</span><div><h4>۷ روز بازگشت</h4><p>ضمانت بازگشت وجه</p></div></div>
+    <div class="feature"><span class="fi">💳</span><div><h4>پرداخت امن</h4><p>درگاه امن و پرداخت در محل</p></div></div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="container section">
+  <div class="section-head"><div><h2>خرید بر اساس دسته‌بندی</h2><p>هر آنچه برای خانه نیاز دارید</p></div></div>
+  <div class="grid cat-grid" id="categories"></div>
+</section>
+
+<!-- Promo -->
+<section class="container section" style="padding-block:10px">
+  <div class="promo">
+    <div><h3>۱۵٪ تخفیف ویژه فصل</h3><p>روی خرید از کالکشن جدید لوازم خانگی بهره‌مند شوید.</p></div>
+    <button class="btn btn-lg" onclick="filterFeatured()">خرید با تخفیف</button>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="container section" id="products">
+  <div class="section-head"><div><h2 id="grid-title">همه محصولات</h2><p id="grid-count"></p></div>
+    <button class="btn btn-ghost btn-sm" onclick="clearFilter()">نمایش همه</button></div>
+  <div class="grid product-grid" id="grid"></div>
+</section>
+
+<footer class="footer">
+  <div class="container">© ۲۰۲۶ منوجان کالا — دموی آفلاین · ساخته‌شده در سطح Enterprise ❤️</div>
+</footer>
+
+<!-- Cart drawer -->
+<div class="drawer-wrap" id="drawer">
+  <div class="drawer-bg" onclick="toggleCart(false)"></div>
+  <aside class="drawer">
+    <div class="drawer-head"><h3>سبد خرید</h3><button class="icon-btn" onclick="toggleCart(false)">✕</button></div>
+    <div class="drawer-body" id="cart-body"></div>
+    <div class="drawer-foot" id="cart-foot"></div>
+  </aside>
+</div>
+
+<div class="toast-host" id="toasts"></div>
+
+<script>
+/* ── Embedded catalogue (no backend needed) ── */
+const CATS=[
+ {slug:'kitchen',name:'آشپزخانه',icon:'🍳'},
+ {slug:'large',name:'لوازم خانگی بزرگ',icon:'🧺'},
+ {slug:'climate',name:'تهویه و سرمایش',icon:'❄️'},
+ {slug:'care',name:'مراقبت شخصی',icon:'💈'},
+ {slug:'cleaning',name:'جاروبرقی و نظافت',icon:'🧹'},
+ {slug:'av',name:'صوتی و تصویری',icon:'📺'},
+];
+const IMG=id=>`https://images.unsplash.com/photo-${id}?w=800&q=80`;
+const P=[
+ {n:'یخچال فریزر ساید بای ساید سامسونگ RS68',b:'Samsung',c:'large',price:78500000,old:89900000,r:5,rc:48,trend:1,feat:1,img:'1571175443880-49e1d25b2bc5',s:{'حجم':'617 لیتر','رنگ':'استیل','نوع برفک':'No Frost','گارانتی':'24 ماه'}},
+ {n:'ماشین لباسشویی ال‌جی 9 کیلویی سری F4',b:'LG',c:'large',price:42300000,old:47000000,r:4,rc:32,trend:1,feat:1,img:'1626806787461-102c1bfaaea1',s:{'ظرفیت':'9 کیلوگرم','دور موتور':'1400 RPM','رنگ':'سفید','گارانتی':'18 ماه'}},
+ {n:'ماشین ظرفشویی بوش سری 6 - 14 نفره',b:'Bosch',c:'large',price:51900000,old:0,r:5,rc:21,feat:1,img:'1585659722983-3a675dabf23d',s:{'ظرفیت':'14 نفره','برنامه‌ها':'8 برنامه','رنگ':'استیل','گارانتی':'24 ماه'}},
+ {n:'مایکروویو پاناسونیک 32 لیتری اینورتر',b:'Panasonic',c:'kitchen',price:14800000,old:16500000,r:4,rc:17,trend:1,img:'1574269909862-7e1d70bb8078',s:{'حجم':'32 لیتر','توان':'1000 وات','گریل':'دارد','گارانتی':'12 ماه'}},
+ {n:'سرخ‌کن بدون روغن فیلیپس Airfryer XXL',b:'Philips',c:'kitchen',price:9700000,old:11200000,r:5,rc:60,trend:1,feat:1,img:'1626074353765-517a681e40be',s:{'ظرفیت':'7.3 لیتر','توان':'2225 وات','رنگ':'مشکی','گارانتی':'18 ماه'}},
+ {n:'مخلوط‌کن و غذاساز کنوود سری Chef',b:'Kenwood',c:'kitchen',price:18900000,old:0,r:4,rc:12,img:'1570222094114-d054a817e56b',s:{'توان':'1000 وات','حجم کاسه':'4.6 لیتر','متعلقات':'5 عدد','گارانتی':'24 ماه'}},
+ {n:'اسپرسوساز دلونگی Dedica EC685',b:'DeLonghi',c:'kitchen',price:21500000,old:24000000,r:5,rc:28,trend:1,img:'1517256064527-09c73fc73e38',s:{'فشار':'15 بار','مخزن':'1.1 لیتر','رنگ':'نقره‌ای','گارانتی':'12 ماه'}},
+ {n:'کولر گازی اینورتر گری 18000 سرد و گرم',b:'Gree',c:'climate',price:36800000,old:0,r:4,rc:9,feat:1,img:'1631545806609-c2b999c5b5a8',s:{'ظرفیت':'18000 BTU','نوع':'اینورتر سرد و گرم','کلاس انرژی':'A','گارانتی':'36 ماه'}},
+ {n:'تصفیه هوا شیائومی Air Purifier 4 Pro',b:'Xiaomi',c:'climate',price:12300000,old:13900000,r:5,rc:26,trend:1,img:'1626436819821-d2edd5fee674',s:{'پوشش':'60 متر مربع','فیلتر':'HEPA H13','اتصال':'WiFi','گارانتی':'12 ماه'}},
+ {n:'جاروبرقی رباتیک آی‌روبات Roomba i7',b:'iRobot',c:'cleaning',price:33500000,old:38000000,r:5,rc:40,trend:1,feat:1,img:'1603618000050-d9d4b6a6e5b5',s:{'ناوبری':'iAdapt 3.0','باتری':'75 دقیقه','اتصال':'WiFi + App','گارانتی':'12 ماه'}},
+ {n:'جاروبرقی بدون کیسه بوش سری 4',b:'Bosch',c:'cleaning',price:15600000,old:0,r:4,rc:14,img:'1558317374-067fb5f30001',s:{'توان':'2200 وات','فیلتر':'HEPA','رنگ':'قرمز','گارانتی':'24 ماه'}},
+ {n:'سشوار حرفه‌ای فیلیپس BHD340',b:'Philips',c:'care',price:4200000,old:4900000,r:4,rc:55,img:'1522338242992-e1a54906a8da',s:{'توان':'2100 وات','حالت‌ها':'6 حالت','یونیزه':'دارد','گارانتی':'12 ماه'}},
+ {n:'ریش‌تراش براون سری 9 Pro',b:'Braun',c:'care',price:28900000,old:32500000,r:5,rc:31,trend:1,img:'1621607512214-68297480165e',s:{'ضد آب':'دارد','شارژ':'60 دقیقه','تیغه':'5 المان برش','گارانتی':'24 ماه'}},
+ {n:'تلویزیون هوشمند سامسونگ 55 اینچ Crystal UHD',b:'Samsung',c:'av',price:44900000,old:49900000,r:5,rc:37,trend:1,feat:1,img:'1593359677879-a4bb92f829d1',s:{'سایز':'55 اینچ','کیفیت':'4K UHD','هوشمند':'Tizen OS','گارانتی':'24 ماه'}},
+ {n:'ساندبار ال‌جی 3.1 کانال با ساب‌ووفر',b:'LG',c:'av',price:19800000,old:0,r:4,rc:18,img:'1545454675-3531b543be5d',s:{'کانال':'3.1','توان':'420 وات','بلوتوث':'دارد','گارانتی':'18 ماه'}},
+ {n:'چای‌ساز و کتری برقی فلر TS091',b:'Feller',c:'kitchen',price:3100000,old:3600000,r:4,rc:22,img:'1556909211-36987daf7b4d',s:{'توان':'2200 وات','حجم':'1.7 لیتر','جنس':'استیل','گارانتی':'12 ماه'}},
+].map((p,i)=>({id:i+1,...p,image:IMG(p.img)}));
+
+/* ── Helpers ── */
+const fmt=new Intl.NumberFormat('fa-IR');
+const toman=v=>fmt.format(Math.round(v))+' تومان';
+const stars=r=>'★'.repeat(Math.round(r))+'☆'.repeat(5-Math.round(r));
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let filter={cat:'',q:'',feat:false};
+let cart=JSON.parse(localStorage.getItem('mk_demo_cart')||'[]');
+
+/* ── Theme ── */
+function initTheme(){const t=localStorage.getItem('mk_demo_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}
+document.getElementById('theme').onclick=()=>{const c=document.documentElement.getAttribute('data-theme');const n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('mk_demo_theme',n);};
+initTheme();
+
+/* ── Toast ── */
+function toast(m){const h=document.getElementById('toasts');const e=document.createElement('div');e.className='toast';e.textContent=m;h.appendChild(e);setTimeout(()=>{e.style.opacity='0';setTimeout(()=>e.remove(),250);},2600);}
+
+/* ── Categories ── */
+function renderCats(){
+  const counts={};P.forEach(p=>counts[p.c]=(counts[p.c]||0)+1);
+  document.getElementById('categories').innerHTML=CATS.map(c=>`
+   <div class="cat-tile ${filter.cat===c.slug?'active':''}" onclick="filterCat('${c.slug}')">
+     <span class="cat-icon">${c.icon}</span><span class="cat-name">${esc(c.name)}</span><span class="cat-count">${counts[c.slug]||0} محصول</span>
+   </div>`).join('');
+}
+
+/* ── Product grid ── */
+function card(p){
+  const sale=p.old>p.price,disc=sale?Math.round((1-p.price/p.old)*100):0;
+  return `<article class="product-card" onclick="openProduct(${p.id})">
+    <div class="p-media">${sale?`<span class="badge">${disc}% تخفیف</span>`:''}${p.trend?'<span class="badge trend">پرفروش</span>':''}
+      <img src="${p.image}" alt="${esc(p.n)}" loading="lazy"></div>
+    <div class="p-body"><span class="p-brand">${esc(p.b)}</span><span class="p-name">${esc(p.n)}</span>
+      <div class="p-rating"><span class="stars">${stars(p.r)}</span><span>(${p.rc})</span></div>
+      <div class="p-foot"><div>${sale?`<div class="price-old">${toman(p.old)}</div>`:''}<div class="price">${toman(p.price)}</div></div>
+        <button class="add-btn" onclick="event.stopPropagation();addCart(${p.id})" title="افزودن">
+          <svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div></div></article>`;
+}
+function renderGrid(){
+  let list=P.filter(p=>(!filter.cat||p.c===filter.cat)&&(!filter.feat||p.feat)&&(!filter.q||(p.n+p.b).toLowerCase().includes(filter.q.toLowerCase())));
+  document.getElementById('grid').innerHTML=list.length?list.map(card).join(''):'<p class="muted">محصولی یافت نشد.</p>';
+  document.getElementById('grid-count').textContent=list.length+' محصول';
+  const cat=CATS.find(c=>c.slug===filter.cat);
+  document.getElementById('grid-title').textContent=filter.q?`جستجو: «${filter.q}»`:filter.feat?'پیشنهادهای ویژه':cat?cat.name:'همه محصولات';
+}
+function filterCat(s){filter.cat=filter.cat===s?'':s;filter.feat=false;renderCats();renderGrid();document.getElementById('products').scrollIntoView({behavior:'smooth'});}
+function filterFeatured(){filter.feat=true;filter.cat='';filter.q='';document.getElementById('search').value='';renderCats();renderGrid();document.getElementById('products').scrollIntoView({behavior:'smooth'});}
+function clearFilter(){filter={cat:'',q:'',feat:false};document.getElementById('search').value='';renderCats();renderGrid();}
+document.getElementById('search').addEventListener('input',e=>{filter.q=e.target.value.trim();filter.cat='';filter.feat=false;renderCats();renderGrid();});
+
+/* ── Product modal ── */
+function openProduct(id){
+  const p=P.find(x=>x.id===id);const sale=p.old>p.price;let qty=1;
+  const ov=document.createElement('div');ov.className='overlay';ov.onclick=e=>{if(e.target===ov)ov.remove();};
+  ov.innerHTML=`<div class="modal"><button class="modal-close" onclick="this.closest('.overlay').remove()">✕</button>
+    <div class="modal-grid">
+      <div class="modal-img"><img src="${p.image}" alt="${esc(p.n)}"></div>
+      <div><span class="p-brand">${esc(p.b)}</span><h2>${esc(p.n)}</h2>
+        <div class="p-rating"><span class="stars">${stars(p.r)}</span><span>${p.r} از ۵ (${p.rc} نظر)</span></div>
+        <div class="pdp-price"><span class="price">${toman(p.price)}</span>${sale?`<span class="price-old">${toman(p.old)}</span>`:''}</div>
+        <span class="pill">✓ موجود در انبار</span>
+        <div class="qty"><button id="qd">−</button><span id="qv">1</span><button id="qi">+</button></div>
+        <button class="btn btn-primary btn-lg btn-block" id="addbtn">افزودن به سبد خرید</button>
+        <table class="specs">${Object.entries(p.s).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('')}</table>
+      </div></div></div>`;
+  document.body.appendChild(ov);
+  const qv=ov.querySelector('#qv');
+  ov.querySelector('#qd').onclick=()=>{qty=Math.max(1,qty-1);qv.textContent=qty;};
+  ov.querySelector('#qi').onclick=()=>{qty=Math.min(99,qty+1);qv.textContent=qty;};
+  ov.querySelector('#addbtn').onclick=()=>{addCart(id,qty);ov.remove();};
+}
+
+/* ── Cart ── */
+function saveCart(){localStorage.setItem('mk_demo_cart',JSON.stringify(cart));updateBadge();}
+function updateBadge(){const n=cart.reduce((a,i)=>a+i.q,0);const b=document.getElementById('cart-count');b.textContent=n;b.classList.toggle('hidden',n===0);}
+function addCart(id,q=1){const p=P.find(x=>x.id===id);const ex=cart.find(i=>i.id===id);if(ex)ex.q=Math.min(99,ex.q+q);else cart.push({id,q});saveCart();toast(`«${p.n.slice(0,26)}» به سبد اضافه شد ✓`);}
+function setQty(id,d){const it=cart.find(i=>i.id===id);if(!it)return;it.q+=d;if(it.q<=0)cart=cart.filter(i=>i.id!==id);saveCart();renderCart();}
+function removeItem(id){cart=cart.filter(i=>i.id!==id);saveCart();renderCart();}
+function toggleCart(open){const d=document.getElementById('drawer');if(open){renderCart();d.classList.add('open');}else d.classList.remove('open');}
+document.getElementById('cart-btn').onclick=()=>toggleCart(true);
+function renderCart(){
+  const body=document.getElementById('cart-body'),foot=document.getElementById('cart-foot');
+  if(!cart.length){body.innerHTML='<div class="empty"><div class="emoji">🛒</div><h3>سبد خرید خالی است</h3><p class="muted" style="margin-top:6px">محصولی اضافه کنید</p></div>';foot.innerHTML='';return;}
+  let sub=0;
+  body.innerHTML=cart.map(i=>{const p=P.find(x=>x.id===i.id);sub+=p.price*i.q;return `
+    <div class="cart-item"><img src="${p.image}" alt="">
+      <div><div class="ci-name">${esc(p.n)}</div><div class="ci-meta">${toman(p.price)}</div>
+        <button class="ci-remove" onclick="removeItem(${i.id})">حذف</button></div>
+      <div style="text-align:end"><div class="qty" style="margin:0 0 6px"><button onclick="setQty(${i.id},-1)">−</button><span>${i.q}</span><button onclick="setQty(${i.id},1)">+</button></div>
+        <strong>${toman(p.price*i.q)}</strong></div></div>`;}).join('');
+  const disc=Math.floor(sub*0.0);
+  foot.innerHTML=`<div class="sum-row"><span>جمع کالاها</span><span>${toman(sub)}</span></div>
+    <div class="sum-row"><span>هزینه ارسال</span><span style="color:var(--success)">رایگان</span></div>
+    <div class="sum-row total"><span>قابل پرداخت</span><span>${toman(sub)}</span></div>
+    <button class="btn btn-primary btn-block btn-lg" style="margin-top:12px" onclick="checkout()">ثبت سفارش</button>`;
+}
+function checkout(){toast('✅ سفارش ثبت شد! (دموی آفلاین)');cart=[];saveCart();renderCart();setTimeout(()=>toggleCart(false),900);}
+
+/* ── Init ── */
+renderCats();renderGrid();updateBadge();
+</script>
+</body>
+</html>
