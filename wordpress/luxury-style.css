@@ -1,0 +1,82 @@
+/* ════════════════════════════════════════════════════════════════
+   منوجان کالا — استایل لوکس برای ووکامرس
+   روش استفاده: وردپرس ← نمایش ← سفارشی‌سازی ← «CSS افزودنی»
+   کل این کد را آن‌جا پیست کن و «انتشار» را بزن.
+   نکته: خط @import حتماً باید اولین خط بماند.
+   ════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+  --mk-gold:#b8860b; --mk-gold-dark:#8a6508; --mk-gold-soft:#f5ecd5;
+  --mk-ink:#1a1714; --mk-muted:#6b645c; --mk-border:#e7e2da;
+}
+
+/* فونت لوکس فارسی */
+body, .woocommerce, .woocommerce-page, button, input, select, textarea{
+  font-family:'Vazirmatn', Tahoma, sans-serif !important;
+}
+.woocommerce h1,.woocommerce h2,.woocommerce h3,.woocommerce .products h2{
+  font-weight:800; letter-spacing:-.02em;
+}
+
+/* کارت محصول */
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product{
+  background:#fff; border:1px solid var(--mk-border); border-radius:16px;
+  padding:14px !important; box-shadow:0 1px 3px rgba(26,23,20,.06);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; overflow:hidden;
+}
+.woocommerce ul.products li.product:hover{
+  transform:translateY(-6px); box-shadow:0 20px 30px -12px rgba(26,23,20,.18); border-color:var(--mk-gold);
+}
+.woocommerce ul.products li.product a img{
+  border-radius:12px; aspect-ratio:1/1; object-fit:cover; margin-bottom:12px;
+}
+.woocommerce ul.products li.product .woocommerce-loop-product__title{
+  font-size:1rem !important; font-weight:700 !important; line-height:1.6; min-height:3.2em;
+}
+.woocommerce ul.products li.product .price{
+  color:var(--mk-ink) !important; font-weight:900 !important; font-size:1.05rem;
+}
+.woocommerce ul.products li.product .price del{ color:var(--mk-muted); font-weight:400; }
+.woocommerce ul.products li.product .price ins{ text-decoration:none; color:var(--mk-gold-dark); }
+.woocommerce .star-rating span{ color:var(--mk-gold); }
+
+/* دکمه‌های طلایی */
+.woocommerce a.button, .woocommerce button.button, .woocommerce .button,
+.woocommerce #respond input#submit, .woocommerce ul.products li.product .button,
+.woocommerce div.product form.cart .button,
+.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,
+.woocommerce #payment #place_order{
+  background:linear-gradient(135deg,var(--mk-gold),var(--mk-gold-dark)) !important;
+  color:#fff !important; border:none !important; border-radius:10px !important;
+  font-weight:700 !important; padding:11px 20px !important;
+  box-shadow:0 2px 6px rgba(184,134,11,.25); transition:transform .2s ease, box-shadow .2s ease;
+}
+.woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce .button:hover,
+.woocommerce #respond input#submit:hover, .woocommerce ul.products li.product .button:hover{
+  transform:translateY(-2px); box-shadow:0 8px 18px rgba(184,134,11,.32); color:#fff !important;
+}
+.woocommerce ul.products li.product .button{ width:100%; text-align:center; margin-top:8px; }
+
+/* برچسب حراج */
+.woocommerce span.onsale{
+  background:#b91c1c !important; color:#fff !important; border-radius:999px !important;
+  font-weight:800; min-height:auto; padding:4px 12px; line-height:1.6;
+}
+
+/* صفحه‌ی تک‌محصول */
+.woocommerce div.product .product_title{ font-weight:900; letter-spacing:-.02em; }
+.woocommerce div.product p.price, .woocommerce div.product span.price{ color:var(--mk-gold-dark) !important; font-weight:900; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active{ border-bottom:2px solid var(--mk-gold); }
+
+/* پیام‌ها و فرم‌ها */
+.woocommerce-message, .woocommerce-info{ border-top-color:var(--mk-gold) !important; }
+.woocommerce-message::before, .woocommerce-info::before{ color:var(--mk-gold) !important; }
+.woocommerce form .form-row input.input-text, .woocommerce .quantity .qty, .woocommerce form .form-row textarea{
+  border:1.5px solid var(--mk-border) !important; border-radius:8px !important; padding:10px 12px !important;
+}
+.woocommerce form .form-row input.input-text:focus{
+  outline:none; border-color:var(--mk-gold) !important; box-shadow:0 0 0 3px var(--mk-gold-soft);
+}
+a{ color:var(--mk-gold-dark); }
