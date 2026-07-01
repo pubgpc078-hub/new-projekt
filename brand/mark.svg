@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="نشان منوجان کالا">
+  <!--
+    MANOOJAN KALA — Primary Mark
+    Construction: 90° apex (two 45° roof lines), rounded pentagon (r=8, apex r=10),
+    negative-space circle Ø46 centered on the golden section of the mark's height.
+    Single flat shape, true negative space (even-odd), engraving/foil/laser ready.
+  -->
+  <path fill="#0A0A0A" fill-rule="evenodd" d="
+    M52.93 21.07
+    A10 10 0 0 1 67.07 21.07
+    L101.66 55.66
+    A8 8 0 0 1 104 61.31
+    L104 98
+    A8 8 0 0 1 96 106
+    L24 106
+    A8 8 0 0 1 16 98
+    L16 61.31
+    A8 8 0 0 1 18.34 55.66
+    Z
+    M60 48
+    a23 23 0 1 0 0 46
+    a23 23 0 1 0 0 -46
+    Z"/>
+</svg>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منوجان کالا — سیستم هویت بصری</title>
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<style>
+:root{
+  --black:#0A0A0A; --white:#FFFFFF; --graphite:#2E3338; --silver:#C7CCD1;
+  --navy:#0B1F33; --blue:#0A84FF; --paper:#FAFAF8; --line:#E7E7E3; --muted:#6E7278;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Vazirmatn',system-ui,Tahoma,sans-serif;background:var(--paper);color:var(--black);line-height:1.9;-webkit-font-smoothing:antialiased}
+.en{font-family:Helvetica,Arial,sans-serif}
+.wrap{width:min(1100px,100% - 48px);margin-inline:auto}
+section{padding:88px 0;border-bottom:1px solid var(--line)}
+h2{font-size:1.9rem;font-weight:900;margin-bottom:8px}
+h2 .num{color:var(--silver);font-weight:400;margin-inline-end:10px}
+.lead{color:var(--muted);max-width:64ch;margin-bottom:44px}
+h3{font-size:1.1rem;font-weight:800;margin:34px 0 12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:28px}
+.tile{background:var(--white);border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:36px;min-height:190px}
+.tile.dark{background:var(--black)}
+.tile.graphite{background:var(--graphite)}
+.tile.navy{background:var(--navy)}
+.tile.silver{background:var(--silver)}
+.cap{font-size:.8rem;color:var(--muted);margin-top:10px;text-align:center}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:.86rem}
+th,td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:right}
+th{background:#F2F2EE;font-weight:800;font-size:.8rem}
+tr:last-child td{border-bottom:none}
+.win td{background:#F4F9F4;font-weight:700}
+.pill{display:inline-block;background:#EFEFEA;border-radius:999px;padding:2px 12px;font-size:.78rem;color:var(--graphite);margin:3px 2px}
+.no{color:#B3261E;font-weight:800}
+.yes{color:#1B7A3D;font-weight:800}
+
+/* cover */
+.cover{min-height:92vh;display:grid;place-items:center;text-align:center;background:var(--white);border-bottom:1px solid var(--line)}
+.cover svg{width:150px;height:150px}
+.cover h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;margin-top:34px;letter-spacing:-.01em}
+.cover .en-sub{letter-spacing:.55em;font-size:.85rem;color:var(--muted);margin-top:14px;font-weight:600}
+.cover .doc{margin-top:44px;font-size:.82rem;color:var(--muted)}
+
+/* concepts */
+.concepts{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-bottom:36px}
+.concept{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px 10px;text-align:center}
+.concept svg{width:64px;height:64px}
+.concept b{display:block;font-size:.74rem;margin-top:8px}
+.concept span{font-size:.7rem;color:var(--muted)}
+.concept.winner{border:2px solid var(--black)}
+
+/* construction */
+.blueprint{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:30px;display:grid;place-items:center}
+.blueprint svg{width:min(460px,100%)}
+
+/* favicon sim */
+.px16 svg{width:16px;height:16px}
+.px32 svg{width:32px;height:32px}
+.px64 svg{width:64px;height:64px}
+.simrow{display:flex;align-items:flex-end;gap:38px;justify-content:center;padding:30px}
+
+/* swatches */
+.sw{border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.sw .chip{height:110px}
+.sw .info{background:var(--white);padding:14px 16px;font-size:.78rem;line-height:1.7}
+.sw .info b{font-size:.92rem;display:block}
+
+/* don'ts */
+.dont{position:relative}
+.dont .tile{min-height:150px;padding:24px}
+.dont::after{content:'✕';position:absolute;top:10px;left:14px;color:#B3261E;font-weight:900;font-size:1.1rem}
+.dont svg{width:76px;height:76px}
+
+/* mockups */
+.mock{border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+.sign{background:var(--graphite);height:260px;display:grid;place-items:center}
+.sign .board{background:var(--black);padding:26px 60px;border-radius:10px;display:flex;align-items:center;gap:22px;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.sign svg{width:54px;height:54px}
+.sign .fa{color:#fff;font-weight:900;font-size:1.5rem}
+.bag-scene{background:#EDEDE9;height:300px;display:grid;place-items:center}
+.bag{width:170px;height:210px;background:var(--white);border-radius:6px 6px 10px 10px;position:relative;display:grid;place-items:center;box-shadow:0 24px 40px rgba(0,0,0,.14)}
+.bag::before{content:'';position:absolute;top:-26px;width:70px;height:52px;border:5px solid var(--graphite);border-bottom:none;border-radius:34px 34px 0 0}
+.bag svg{width:64px;height:64px}
+.card-scene{background:var(--graphite);height:300px;display:grid;place-items:center}
+.bcard{width:320px;aspect-ratio:1.75;background:var(--black);border-radius:12px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 26px 50px rgba(0,0,0,.5)}
+.bcard svg{width:40px;height:40px}
+.bcard .nm{color:#fff;font-weight:800;font-size:1rem}
+.bcard .rl{color:#9AA0A6;font-size:.7rem;letter-spacing:.2em}
+.web{background:var(--white)}
+.web .bar{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid var(--line)}
+.web .bar svg{width:34px;height:34px}
+.web .links{display:flex;gap:26px;font-size:.8rem;color:var(--muted)}
+.web .hero-sim{padding:46px 28px;text-align:center}
+.web .hero-sim h4{font-size:1.4rem;font-weight:900}
+.web .hero-sim p{font-size:.8rem;color:var(--muted)}
+.appdock{background:var(--navy);height:300px;display:grid;place-items:center}
+.appdock .icon{width:104px;height:104px;border-radius:24px;overflow:hidden;box-shadow:0 20px 44px rgba(0,0,0,.4)}
+.appdock .icon svg{width:100%;height:100%}
+.appdock p{color:#B8C2CC;font-size:.72rem;text-align:center;margin-top:12px}
+.van-scene{background:#E4E6E8;height:300px;display:grid;place-items:center}
+.van{width:340px;height:150px;background:var(--white);border-radius:16px 60px 10px 10px;position:relative;box-shadow:0 26px 44px rgba(0,0,0,.16);display:flex;align-items:center;justify-content:center;gap:16px}
+.van::after{content:'';position:absolute;bottom:-16px;right:44px;width:34px;height:34px;background:var(--graphite);border-radius:50%;box-shadow:-210px 0 0 var(--graphite)}
+.van::before{content:'';position:absolute;top:12px;left:14px;width:64px;height:44px;background:var(--silver);border-radius:8px 34px 4px 4px}
+.van svg{width:52px;height:52px}
+.van b{font-weight:900;font-size:1.25rem}
+
+footer{padding:44px 0;text-align:center;font-size:.8rem;color:var(--muted)}
+@media(max-width:900px){
+  .grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}
+  .concepts{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:560px){
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .concepts{grid-template-columns:repeat(2,1fr)}
+  th,td{padding:8px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <path id="mark" fill-rule="evenodd" d="M52.93 21.07A10 10 0 0 1 67.07 21.07L101.66 55.66A8 8 0 0 1 104 61.31L104 98A8 8 0 0 1 96 106L24 106A8 8 0 0 1 16 98L16 61.31A8 8 0 0 1 18.34 55.66Z M60 48a23 23 0 1 0 0 46a23 23 0 1 0 0 -46Z"/>
+    <path id="markfav" fill-rule="evenodd" d="M52.93 21.07A10 10 0 0 1 67.07 21.07L101.66 55.66A8 8 0 0 1 104 61.31L104 98A8 8 0 0 1 96 106L24 106A8 8 0 0 1 16 98L16 61.31A8 8 0 0 1 18.34 55.66Z M60 46a25 25 0 1 0 0 50a25 25 0 1 0 0 -50Z"/>
+  </defs>
+</svg>
+
+<!-- ═════════ COVER ═════════ -->
+<div class="cover">
+  <div>
+    <svg viewBox="0 0 120 120"><use href="#mark" fill="#0A0A0A"/></svg>
+    <h1>منوجان کالا</h1>
+    <div class="en-sub en">MANOOJAN&nbsp;KALA</div>
+    <div class="doc">سیستم هویت بصری — نسخه ۱٫۰ — تیرماه ۱۴۰۵<br>Visual Identity System &amp; Brand Guidelines</div>
+  </div>
+</div>
+
+<!-- ═════════ 01 RESEARCH ═════════ -->
+<section><div class="wrap">
+  <h2><span class="num en">01</span>مبانی پژوهش</h2>
+  <p class="lead">پیش از طراحی، الگوهای ماندگاری نشان‌های بزرگ (اپل، براون، دایسون، بوش، میله، سونی، ایکیا و…) تحلیل شد. آنچه مشترک است، نه «شکل» بلکه «انضباط» است. این اصول مبنای طراحی قرار گرفت:</p>
+  <div class="grid3">
+    <div class="card"><h3 style="margin-top:0">یک ایده، نه چند ایده</h3><p style="font-size:.88rem;color:var(--muted)">نشان‌های ماندگار فقط یک حرف می‌زنند. هر عنصر دوم، عمر لوگو را کوتاه می‌کند.</p></div>
+    <div class="card"><h3 style="margin-top:0">سیلوئت قوی</h3><p style="font-size:.88rem;color:var(--muted)">اگر لوگو فقط با کانتور مشکی هم قابل تشخیص باشد، در هر مقیاس و متریالی زنده می‌ماند.</p></div>
+    <div class="card"><h3 style="margin-top:0">فضای منفی هوشمند</h3><p style="font-size:.88rem;color:var(--muted)">معنای پنهان در فضای خالی، لوگو را از «دیدنی» به «به‌یادماندنی» تبدیل می‌کند.</p></div>
+    <div class="card"><h3 style="margin-top:0">هندسه ریاضی + تصحیح اپتیکال</h3><p style="font-size:.88rem;color:var(--muted)">گرید مبنا است، اما چشم انسان داور نهایی است؛ مرکز اپتیکال بالاتر از مرکز هندسی است.</p></div>
+    <div class="card"><h3 style="margin-top:0">آزمون ۱۶ پیکسل</h3><p style="font-size:.88rem;color:var(--muted)">هر جزئیاتی که در ۱۶×۱۶ گم شود، جزئیات اضافه است و باید حذف شود.</p></div>
+    <div class="card"><h3 style="margin-top:0">بی‌اعتنایی به مُد</h3><p style="font-size:.88rem;color:var(--muted)">بدون گرادیان، سایه و افکت. فقط فرم خالص که ۳۰ سال بعد هم مدرن بماند.</p></div>
+  </div>
+</div></section>
+
+<!-- ═════════ 02 PROCESS ═════════ -->
+<section><div class="wrap">
+  <h2><span class="num en">02</span>فرآیند خلاقانه</h2>
+  <p class="lead">۵۰ مسیر در ۶ خانواده مفهومی کاوش شد: مونوگرام «م/M»، انتزاع خانه، فرم لوازم (درام/دایره)، فضای منفی، فرم‌های اتصال/هوشمندی، و وردمارک خالص. نمونه‌های شاخص هر خانواده:</p>
+
+  <div class="concepts">
+    <div class="concept winner">
+      <svg viewBox="0 0 120 120"><use href="#mark" fill="#0A0A0A"/></svg>
+      <b>خانه + مدار</b><span class="en">C-07 · 94</span>
+    </div>
+    <div class="concept">
+      <svg viewBox="0 0 120 120"><path fill="#0A0A0A" fill-rule="evenodd" d="M20 20h80v80H20Z M60 44 38 66h44Z"/></svg>
+      <b>سقف منفی در کاشی</b><span class="en">C-13 · 81</span>
+    </div>
+    <div class="concept">
+      <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="42" fill="#0A0A0A"/><path d="M60 34 84 58H36Z" fill="#FAFAF8"/></svg>
+      <b>سقف در دایره</b><span class="en">C-21 · 78</span>
+    </div>
+    <div class="concept">
+      <svg viewBox="0 0 120 120"><path fill="none" stroke="#0A0A0A" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" d="M24 96V52L60 22l36 30v44"/></svg>
+      <b>M-خانه خطی</b><span class="en">C-02 · 74</span>
+    </div>
+    <div class="concept">
+      <svg viewBox="0 0 120 120"><path fill="#0A0A0A" fill-rule="evenodd" d="M60 16 104 60 60 104 16 60Z M60 44a16 16 0 1 0 .01 0Z"/></svg>
+      <b>لوزی + عدسی</b><span class="en">C-34 · 72</span>
+    </div>
+    <div class="concept">
+      <svg viewBox="0 0 120 120"><rect x="24" y="20" width="72" height="80" rx="14" fill="none" stroke="#0A0A0A" stroke-width="10"/><circle cx="60" cy="60" r="13" fill="#0A0A0A"/></svg>
+      <b>پنل مینیمال</b><span class="en">C-40 · 66</span>
+    </div>
+  </div>
+
+  <h3>جدول امتیازدهی نهایی — ۵ کانسپت برتر از ۵۰</h3>
+  <table>
+    <tr><th>کد</th><th>کانسپت</th><th>اصالت</th><th>ماندگاری</th><th>مقیاس‌پذیری</th><th>لوکس بودن</th><th>بی‌زمانی</th><th>مجموع</th></tr>
+    <tr class="win"><td class="en">C-07</td><td>خانه + مدارِ فضای منفی</td><td>۱۸/۲۰</td><td>۱۹/۲۰</td><td>۲۰/۲۰</td><td>۱۸/۲۰</td><td>۱۹/۲۰</td><td><b>۹۴</b></td></tr>
+    <tr><td class="en">C-13</td><td>سقف منفی در کاشی مربع</td><td>۱۵</td><td>۱۷</td><td>۱۸</td><td>۱۵</td><td>۱۶</td><td>۸۱</td></tr>
+    <tr><td class="en">C-21</td><td>سقف سفید در دایره</td><td>۱۴</td><td>۱۶</td><td>۱۷</td><td>۱۵</td><td>۱۶</td><td>۷۸</td></tr>
+    <tr><td class="en">C-02</td><td>مونوگرام خطی M-خانه</td><td>۱۶</td><td>۱۵</td><td>۱۳ <small>(در ۱۶px ضعیف)</small></td><td>۱۵</td><td>۱۵</td><td>۷۴</td></tr>
+    <tr><td class="en">C-34</td><td>لوزی + عدسی مرکزی</td><td>۱۶</td><td>۱۴</td><td>۱۵</td><td>۱۴</td><td>۱۳</td><td>۷۲</td></tr>
+  </table>
+
+  <h3>چرخه‌های پالایش کانسپت برنده (۲۰ اصلاح)</h3>
+  <p style="font-size:.9rem;color:var(--muted);max-width:70ch">مهم‌ترین تصمیم‌های اپتیکال و هندسی که فرم نهایی را ساختند:</p>
+  <div>
+    <span class="pill">زاویه رأس دقیقاً ۹۰° (دو یال ۴۵°)</span>
+    <span class="pill">حذف دودکش — عنصر تزئینی بود</span>
+    <span class="pill">حذف درگاه در — تکراری و کلیشه</span>
+    <span class="pill">دایره روی مقطع طلایی ارتفاع (۰٫۶۱۸)</span>
+    <span class="pill">قطر دایره = ۰٫۵۲ عرض بدنه</span>
+    <span class="pill">شعاع گوشه‌ها یکسان ۸ واحد؛ رأس ۱۰ واحد (تصحیح اپتیکال)</span>
+    <span class="pill">تبدیل دو شکل به یک مسیر even-odd (فضای منفی واقعی)</span>
+    <span class="pill">ضخامت دیواره پایین > دیواره کنار (ثبات بصری)</span>
+    <span class="pill">نسخه فاوآیکون: دایره ۲+ واحد بزرگ‌تر</span>
+    <span class="pill">تست ۱۶px، ۳۲px، حکاکی و گلدوزی</span>
+  </div>
+</div></section>
+
+<!-- ═════════ 03 FINAL MARK ═════════ -->
+<section style="background:var(--white)"><div class="wrap">
+  <h2><span class="num en">03</span>نشان نهایی — «مدارِ خانه»</h2>
+  <p class="lead">یک شکل، یک مسیر وکتور، دو معنا. سیلوئت خانه با شانه‌های ۴۵ درجه، و در قلب آن یک دایره کامل از جنس فضای منفی.</p>
+  <div class="grid2">
+    <div class="tile" style="min-height:320px"><svg viewBox="0 0 120 120" style="width:210px"><use href="#mark" fill="#0A0A0A"/></svg></div>
+    <div>
+      <h3 style="margin-top:0">معناهای پنهان</h3>
+      <p style="font-size:.92rem"><b>خانه</b> — سیلوئت بی‌واسطه در کمتر از یک ثانیه خوانده می‌شود.</p>
+      <p style="font-size:.92rem"><b>فناوری</b> — دایره، زبان مشترک لوازم خانگی است: درام لباسشویی، دکمه پاور، لنز، صفحه گرمایشی؛ بدون آنکه هیچ‌کدام را مستقیم نقاشی کند.</p>
+      <p style="font-size:.92rem"><b>حرف «م»</b> — دایره، حلقه حرف «م» منوجان است که خانه، نقش کشیده آن را بازی می‌کند؛ معنایی که فقط با دقت دیده می‌شود.</p>
+      <p style="font-size:.92rem"><b>اعتماد</b> — تقارن کامل محور عمودی و پایه پهن، حس ایستایی و اطمینان مهندسی می‌سازد.</p>
+      <p style="font-size:.92rem"><b>آزمون کودک</b> — یک پنج‌ضلعی و یک دایره؛ هر کودکی می‌تواند آن را از حافظه بکشد.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═════════ 04 CONSTRUCTION ═════════ -->
+<section><div class="wrap">
+  <h2><span class="num en">04</span>گرید ساخت و حریم امن</h2>
+  <p class="lead">هیچ نقطه‌ای تصادفی نیست. واحد مبنا <b class="en">X</b> = شعاع دایره منفی است.</p>
+  <div class="grid2">
+    <div>
+      <div class="blueprint">
+        <svg viewBox="-10 -10 140 140">
+          <g stroke="#D8E2EC" stroke-width=".7">
+            <line x1="-10" y1="14" x2="130" y2="14"/><line x1="-10" y1="58" x2="130" y2="58"/>
+            <line x1="-10" y1="71" x2="130" y2="71"/><line x1="-10" y1="106" x2="130" y2="106"/>
+            <line x1="16" y1="-10" x2="16" y2="130"/><line x1="60" y1="-10" x2="60" y2="130"/><line x1="104" y1="-10" x2="104" y2="130"/>
+          </g>
+          <circle cx="60" cy="71" r="23" fill="none" stroke="#7FB3E8" stroke-width=".9" stroke-dasharray="3 3"/>
+          <circle cx="60" cy="71" r="44" fill="none" stroke="#CFE0F2" stroke-width=".8" stroke-dasharray="2 4"/>
+          <use href="#mark" fill="#0A0A0A" opacity=".9"/>
+          <g fill="#4A7FB5" font-size="6" class="en">
+            <text x="63" y="10">90°</text>
+            <text x="107" y="45" transform="rotate(0)">45°</text>
+            <text x="63" y="74">Ø = 0.52W</text>
+            <text x="-8" y="76">0.618H</text>
+            <text x="107" y="103">r = 8</text>
+          </g>
+          <path d="M40 34 L52 22 M80 34 L68 22" stroke="#4A7FB5" stroke-width=".8" fill="none"/>
+        </svg>
+      </div>
+      <p class="cap">رأس ۹۰° · یال‌های ۴۵° · دایره بر مقطع طلایی ارتفاع · شعاع گوشه ثابت</p>
+    </div>
+    <div>
+      <div class="blueprint">
+        <svg viewBox="-46 -46 212 212">
+          <rect x="-30" y="-30" width="180" height="180" fill="none" stroke="#7FB3E8" stroke-width="1.4" stroke-dasharray="5 4"/>
+          <use href="#mark" fill="#0A0A0A"/>
+          <g fill="#4A7FB5" font-size="9" class="en">
+            <text x="52" y="-36">X</text><text x="52" y="164">X</text>
+            <text x="-42" y="64">X</text><text x="156" y="64">X</text>
+          </g>
+        </svg>
+      </div>
+      <p class="cap">حریم امن = X (شعاع دایره) از هر چهار طرف — هیچ عنصری وارد این حریم نمی‌شود</p>
+    </div>
+  </div>
+
+  <h3>حداقل اندازه و آزمون مقیاس</h3>
+  <div class="card">
+    <div class="simrow">
+      <div style="text-align:center"><span class="px16"><svg viewBox="0 0 120 120"><use href="#markfav" fill="#0A0A0A"/></svg></span><p class="cap en">16px</p></div>
+      <div style="text-align:center"><span class="px32"><svg viewBox="0 0 120 120"><use href="#markfav" fill="#0A0A0A"/></svg></span><p class="cap en">32px</p></div>
+      <div style="text-align:center"><span class="px64"><svg viewBox="0 0 120 120"><use href="#mark" fill="#0A0A0A"/></svg></span><p class="cap en">64px</p></div>
+      <div style="text-align:center"><svg viewBox="0 0 120 120" style="width:120px"><use href="#mark" fill="#0A0A0A"/></svg><p class="cap en">120px</p></div>
+    </div>
+    <p style="font-size:.85rem;color:var(--muted);text-align:center">حداقل اندازه چاپ نشان: <b>۶ میلی‌متر</b> · حداقل دیجیتال: <b>۱۶ پیکسل</b> (با نسخه فاوآیکون) · حداقل لوگوی افقی: <b>۲۴ میلی‌متر / ۱۲۰ پیکسل</b> · در گلدوزی و حکاکی فقط نشانِ تنها استفاده شود.</p>
+  </div>
+</div></section>
+
+<!-- ═════════ 05 VARIANTS ═════════ -->
+<section style="background:var(--white)"><div class="wrap">
+  <h2><span class="num en">05</span>خانواده لوگو</h2>
+  <p class="lead">هشت پیکربندی رسمی. در هر کاربرد فقط از همین نسخه‌ها استفاده می‌شود.</p>
+  <div class="grid3">
+    <div><div class="tile"><svg viewBox="0 0 120 120" style="width:110px"><use href="#mark" fill="#0A0A0A"/></svg></div><p class="cap">نشان تنها — مشکی</p></div>
+    <div><div class="tile dark"><svg viewBox="0 0 120 120" style="width:110px"><use href="#mark" fill="#FFFFFF"/></svg></div><p class="cap">نشان تنها — سفید (ریورس)</p></div>
+    <div><div class="tile silver"><svg viewBox="0 0 120 120" style="width:110px"><use href="#mark" fill="#2E3338"/></svg></div><p class="cap">مونوکروم — گرافیت روی نقره‌ای</p></div>
+    <div><div class="tile"><img src="logo-horizontal.svg" alt="لوگوی افقی" style="width:100%"></div><p class="cap">لاک‌آپ افقی (اصلی)</p></div>
+    <div><div class="tile"><img src="logo-vertical.svg" alt="لوگوی عمودی" style="width:56%"></div><p class="cap">لاک‌آپ عمودی (ثانویه)</p></div>
+    <div><div class="tile"><img src="wordmark.svg" alt="وردمارک" style="width:92%"></div><p class="cap">وردمارک تنها</p></div>
+    <div><div class="tile"><img src="app-icon.svg" alt="آیکون اپ" style="width:104px;border-radius:24px"></div><p class="cap">آیکون اپلیکیشن</p></div>
+    <div><div class="tile navy"><svg viewBox="0 0 120 120" style="width:110px"><use href="#mark" fill="#FFFFFF"/></svg></div><p class="cap">روی سرمه‌ای عمیق (ثانویه)</p></div>
+    <div><div class="tile" style="background:#F2F2EE"><span class="px32" style="background:#fff;border:1px solid var(--line);padding:8px;border-radius:6px;display:inline-flex"><svg viewBox="0 0 120 120"><use href="#markfav" fill="#0A0A0A"/></svg></span></div><p class="cap">فاوآیکون (نسخه بهینه ۱۶/۳۲)</p></div>
+  </div>
+</div></section>
+
+<!-- ═════════ 06 COLOR ═════════ -->
+<section><div class="wrap">
+  <h2><span class="num en">06</span>رنگ</h2>
+  <p class="lead">هویت اصلی تک‌رنگ است. رنگ، محصولات را روایت می‌کند نه لوگو را.</p>
+  <div class="grid4">
+    <div class="sw"><div class="chip" style="background:#0A0A0A"></div><div class="info"><b>مشکی خالص · اصلی</b><span class="en">HEX 0A0A0A · RGB 10 10 10<br>CMYK 0 0 0 96 · Pantone Black 6 C</span></div></div>
+    <div class="sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid var(--line)"></div><div class="info"><b>سفید · اصلی</b><span class="en">HEX FFFFFF · RGB 255 255 255<br>CMYK 0 0 0 0 · —</span></div></div>
+    <div class="sw"><div class="chip" style="background:#2E3338"></div><div class="info"><b>گرافیت تیره · ثانویه</b><span class="en">HEX 2E3338 · RGB 46 51 56<br>CMYK 18 9 0 78 · Pantone 447 C</span></div></div>
+    <div class="sw"><div class="chip" style="background:#C7CCD1"></div><div class="info"><b>نقره‌ای پریمیوم · ثانویه</b><span class="en">HEX C7CCD1 · RGB 199 204 209<br>CMYK 5 2 0 18 · Pantone 428 C</span></div></div>
+    <div class="sw"><div class="chip" style="background:#0B1F33"></div><div class="info"><b>سرمه‌ای عمیق · ثانویه</b><span class="en">HEX 0B1F33 · RGB 11 31 51<br>CMYK 78 39 0 80 · Pantone 533 C</span></div></div>
+    <div class="sw"><div class="chip" style="background:#0A84FF"></div><div class="info"><b>آبی الکتریک · تأکیدی محدود</b><span class="en">HEX 0A84FF · RGB 10 132 255<br>CMYK 96 48 0 0 · Pantone 2727 C</span><br><small>فقط UI: لینک و وضعیت هوشمند</small></div></div>
+  </div>
+</div></section>
+
+<!-- ═════════ 07 TYPOGRAPHY ═════════ -->
+<section style="background:var(--white)"><div class="wrap">
+  <h2><span class="num en">07</span>تایپوگرافی</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">وردمارک فارسی</h3>
+      <p style="font-size:2.6rem;font-weight:900;line-height:1.4">منوجان کالا</p>
+      <p style="font-size:.85rem;color:var(--muted)">مبنا: وزیرمتن Black با اصلاح دستی — کرنینگ «ن/و» و «ک/ا» فشرده‌تر (۱-)، کشیده‌ها حذف، ارتفاع دندانه‌ها یکنواخت. نقطه‌ها دایره کامل هستند تا با دایره نشان هم‌خانواده باشند.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">وردمارک لاتین</h3>
+      <p class="en" style="font-size:1.7rem;font-weight:600;letter-spacing:.42em">MANOOJAN KALA</p>
+      <p style="font-size:.85rem;color:var(--muted)">گروتسک هندسی، وزن Semibold، فاصله‌گذاری باز (tracking ۴۰۰+) برای حس مهندسی‌شده. دو حرف <span class="en">O</span> به دایره کامل اصلاح می‌شوند — امضای پنهان برند.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">متن فارسی</h3>
+      <p style="font-size:.9rem">تیتر: وزیرمتن <b>Black / ExtraBold</b><br>متن: وزیرمتن <b>Regular / Medium</b><br>اعداد: همیشه فارسی در متن فارسی</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">متن لاتین / فنی</h3>
+      <p class="en" style="font-size:.9rem">Headlines: Neue Haas / Helvetica Now — Bold<br>Body: Inter / Helvetica — Regular<br>Specs &amp; codes: tabular figures only</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═════════ 08 DON'TS ═════════ -->
+<section><div class="wrap">
+  <h2><span class="num en">08</span>استفاده نادرست</h2>
+  <p class="lead">این کارها هرگز انجام نمی‌شود:</p>
+  <div class="grid4">
+    <div class="dont"><div class="tile"><svg viewBox="0 0 120 120" style="transform:scaleX(1.5)"><use href="#mark" fill="#0A0A0A"/></svg></div><p class="cap">کشیدن و تغییر تناسبات</p></div>
+    <div class="dont"><div class="tile"><svg viewBox="0 0 120 120" style="transform:rotate(-18deg)"><use href="#mark" fill="#0A0A0A"/></svg></div><p class="cap">چرخاندن</p></div>
+    <div class="dont"><div class="tile"><svg viewBox="0 0 120 120"><defs><linearGradient id="badg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4d9d"/><stop offset="1" stop-color="#7a2bff"/></linearGradient></defs><use href="#mark" fill="url(#badg)"/></svg></div><p class="cap">گرادیان و رنگ‌های تند</p></div>
+    <div class="dont"><div class="tile"><svg viewBox="0 0 120 120" style="filter:drop-shadow(6px 8px 4px rgba(0,0,0,.5))"><use href="#mark" fill="#0A0A0A"/></svg></div><p class="cap">سایه و افکت سه‌بعدی</p></div>
+    <div class="dont"><div class="tile" style="background:repeating-linear-gradient(45deg,#bbb 0 8px,#eee 8px 16px)"><svg viewBox="0 0 120 120"><use href="#mark" fill="#0A0A0A"/></svg></div><p class="cap">پس‌زمینه شلوغ بدون حریم</p></div>
+    <div class="dont"><div class="tile"><svg viewBox="0 0 120 120"><use href="#mark" fill="none" stroke="#0A0A0A" stroke-width="3"/></svg></div><p class="cap">تبدیل به خطی (اوت‌لاین)</p></div>
+    <div class="dont"><div class="tile"><svg viewBox="0 0 120 120"><path fill="#0A0A0A" d="M52.93 21.07A10 10 0 0 1 67.07 21.07L101.66 55.66A8 8 0 0 1 104 61.31L104 98A8 8 0 0 1 96 106L24 106A8 8 0 0 1 16 98L16 61.31A8 8 0 0 1 18.34 55.66Z"/></svg></div><p class="cap">حذف دایره (فضای منفی)</p></div>
+    <div class="dont"><div class="tile dark"><svg viewBox="0 0 120 120"><use href="#mark" fill="#4b4f54"/></svg></div><p class="cap">کنتراست ناکافی</p></div>
+  </div>
+</div></section>
+
+<!-- ═════════ 09 MOCKUPS ═════════ -->
+<section style="background:var(--white)"><div class="wrap">
+  <h2><span class="num en">09</span>هویت در دنیای واقعی</h2>
+  <div class="grid2">
+    <div>
+      <div class="mock"><div class="sign"><div class="board"><svg viewBox="0 0 120 120"><use href="#mark" fill="#FFFFFF"/></svg><span class="fa">منوجان کالا</span></div></div></div>
+      <p class="cap">تابلوی سردر فروشگاه — حروف برجسته بدون نور اضافه</p>
+    </div>
+    <div>
+      <div class="mock"><div class="bag-scene"><div class="bag"><svg viewBox="0 0 120 120"><use href="#mark" fill="#0A0A0A"/></svg></div></div></div>
+      <p class="cap">ساک خرید — فقط نشان، بدون هیچ متن اضافه</p>
+    </div>
+    <div>
+      <div class="mock"><div class="card-scene"><div class="bcard"><svg viewBox="0 0 120 120"><use href="#mark" fill="#FFFFFF"/></svg><div><div class="nm">منوجان کالا</div><div class="rl en">MANOOJAN KALA · HOME APPLIANCES</div></div></div></div></div>
+      <p class="cap">کارت ویزیت — مشکی مات، چاپ سیلک سفید</p>
+    </div>
+    <div>
+      <div class="mock"><div class="appdock"><div><div class="icon"><img src="app-icon.svg" alt="آیکون اپ" style="width:100%;display:block"></div><p>منوجان کالا</p></div></div></div>
+      <p class="cap">آیکون اپلیکیشن موبایل</p>
+    </div>
+    <div>
+      <div class="mock web">
+        <div class="bar">
+          <div style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 120 120"><use href="#mark" fill="#0A0A0A"/></svg><b style="font-size:.95rem">منوجان کالا</b></div>
+          <div class="links"><span>محصولات</span><span>خدمات</span><span>درباره ما</span></div>
+        </div>
+        <div class="hero-sim"><h4>خانه هوشمند از اینجا شروع می‌شود</h4><p>لوازم خانگی پریمیوم، مهندسی‌شده برای دهه‌ها</p></div>
+      </div>
+      <p class="cap">هدر وب‌سایت</p>
+    </div>
+    <div>
+      <div class="mock"><div class="van-scene"><div class="van"><svg viewBox="0 0 120 120"><use href="#mark" fill="#0A0A0A"/></svg><b>منوجان کالا</b></div></div></div>
+      <p class="cap">ون تحویل — لوگو روی بدنه سفید، بدون شلوغی</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═════════ 10 FILES ═════════ -->
+<section><div class="wrap">
+  <h2><span class="num en">10</span>فایل‌های تحویلی</h2>
+  <table>
+    <tr><th>فایل</th><th>کاربرد</th></tr>
+    <tr><td class="en">brand/mark.svg</td><td>نشان اصلی مشکی — وکتور با فضای منفی واقعی؛ آماده برش لیزری، فویل و حکاکی</td></tr>
+    <tr><td class="en">brand/mark-white.svg</td><td>نشان سفید برای پس‌زمینه تیره</td></tr>
+    <tr><td class="en">brand/logo-horizontal.svg</td><td>لاک‌آپ اصلی افقی — هدر سایت، سربرگ، امضا</td></tr>
+    <tr><td class="en">brand/logo-vertical.svg</td><td>لاک‌آپ عمودی — بسته‌بندی و تابلو</td></tr>
+    <tr><td class="en">brand/wordmark.svg</td><td>وردمارک تنها</td></tr>
+    <tr><td class="en">brand/app-icon.svg</td><td>آیکون اپ (کاشی مشکی)</td></tr>
+    <tr><td class="en">brand/favicon.svg</td><td>نسخه بهینه ۱۶/۳۲ پیکسل</td></tr>
+    <tr><td class="en">brand/png/*</td><td>خروجی PNG با پس‌زمینه شفاف در ابعاد بالا</td></tr>
+  </table>
+</div></section>
+
+<footer>منوجان کالا — سیستم هویت بصری · نسخه ۱٫۰ · تمامی حقوق محفوظ است</footer>
+</body>
+</html>
