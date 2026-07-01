@@ -113,6 +113,7 @@
     header.innerHTML = `
       <div class="site-header">
         <div class="container header-inner">
+          <button class="icon-btn menu-toggle" data-menu-toggle aria-label="منو">${icon('menu')}</button>
           <a href="/index.html" class="logo">
             <span class="mark">م</span>
             <span class="mark-text">منوجان<b>کالا</b></span>
@@ -129,6 +130,7 @@
             <div class="search-results hidden" data-search-results></div>
           </div>
           <div class="header-actions">
+            <button class="icon-btn search-toggle" title="جستجو" data-search-toggle aria-label="جستجو">${icon('search')}</button>
             <button class="icon-btn" title="تغییر تم" data-theme-toggle aria-label="تغییر تم">
               <span class="icon-sun">${icon('sun')}</span><span class="icon-moon">${icon('moon')}</span>
             </button>
@@ -136,7 +138,6 @@
               ${icon('cart')}<span class="cart-badge hidden" data-cart-badge>0</span>
             </a>
             <span data-auth-area></span>
-            <button class="icon-btn menu-toggle" data-menu-toggle aria-label="منو">${icon('menu')}</button>
           </div>
         </div>
       </div>`;
@@ -149,9 +150,36 @@
     header.querySelector('[data-menu-toggle]').addEventListener('click', () => {
       header.querySelector('[data-nav]').classList.toggle('open');
     });
+    header.querySelector('[data-search-toggle]').addEventListener('click', () => {
+      header.querySelector('[data-search]').classList.toggle('mobile-open');
+      header.querySelector('[data-search-input]').focus();
+    });
     wireSearch(header);
     updateCartBadge();
     renderAuthArea();
+  }
+
+  /* ── Bottom nav (mobile app-shell) ──────────────────────────────── */
+  function renderBottomNav(active) {
+    const host = document.querySelector('[data-app-bottomnav]');
+    if (!host) return;
+    document.body.classList.add('has-bottom-nav');
+    const items = [
+      { k: 'home', href: '/index.html', label: 'خانه', icon: 'home' },
+      { k: 'products', href: '/products.html', label: 'دسته‌بندی', icon: 'grid' },
+      { k: 'cart', href: '/cart.html', label: 'سبد خرید', icon: 'cart', badge: true },
+      { k: 'profile', href: currentUser ? (currentUser.role === 'admin' ? '/admin.html' : '/dashboard.html') : '/login.html', label: 'پروفایل', icon: 'user' },
+    ];
+    host.innerHTML = `
+      <nav class="bottom-nav">
+        ${items.map((it) => `
+          <a class="bn-item${it.k === active ? ' active' : ''}" href="${it.href}">
+            ${icon(it.icon)}
+            <span>${it.label}</span>
+            ${it.badge ? `<span class="bn-badge hidden" data-cart-badge>0</span>` : ''}
+          </a>`).join('')}
+      </nav>`;
+    updateCartBadge();
   }
 
   function renderAuthArea() {
@@ -295,7 +323,7 @@
     window.addEventListener('content:rendered', watch);
   }
 
-  /* ── Inline SVG icons ────────────────────────────────────────────── */
+  /* ── Inline SVG icons (2px stroke, rounded terminals) ─────────────── */
   function icon(name) {
     const p = {
       search: '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
@@ -306,6 +334,16 @@
       menu: '<path d="M3 12h18M3 6h18M3 18h18"/>',
       plus: '<path d="M12 5v14M5 12h14"/>',
       trash: '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',
+      home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/>',
+      grid: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+      chevronLeft: '<path d="m15 18-6-6 6-6"/>',
+      arrowRight: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+      share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-3.9M8.6 13.5l6.8 3.9"/>',
+      shield: '<path d="M12 3 4 6v6c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V6l-8-3Z"/>',
+      box: '<path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/>',
+      logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>',
+      close: '<path d="M18 6 6 18M6 6l12 12"/>',
+      addCart: '<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/><path d="M17 5v6M14 8h6"/>',
     };
     return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p[name] || ''}</svg>`;
   }
@@ -314,10 +352,11 @@
   function boot(options = {}) {
     initTheme();
     renderHeader(options.active);
+    if (options.bottomNav !== false) renderBottomNav(options.active);
     renderFooter();
     updateCartBadge();
     initReveal();
-    loadUser();
+    loadUser().then(() => { if (options.bottomNav !== false) renderBottomNav(options.active); });
   }
 
   // Public surface

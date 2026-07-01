@@ -1,6 +1,6 @@
 /* Customer dashboard — profile + order history. */
 (function () {
-  App.boot();
+  App.boot({ active: 'profile' });
   const root = document.querySelector('[data-dash-root]');
 
   const statusFa = (s) => ({ pending: 'در انتظار پرداخت', paid: 'پرداخت شده', processing: 'در حال پردازش', shipped: 'ارسال شده', delivered: 'تحویل شده', cancelled: 'لغو شده' }[s] || s);
@@ -11,12 +11,25 @@
 
     root.innerHTML = `
       <div class="dash-grid">
-        <aside class="dash-nav">
-          <button class="active" data-view="orders">📦 سفارش‌های من</button>
-          <button data-view="profile">👤 پروفایل</button>
-          <button data-logout>🚪 خروج</button>
+        <aside>
+          <div class="profile-card">
+            <div class="profile-avatar">${App.icon('user')}</div>
+            <h2>${App.escapeHtml(user.name)}</h2>
+            <p class="muted">${user.phone ? App.escapeHtml(user.phone) : App.escapeHtml(user.email)}</p>
+          </div>
+          <nav class="profile-menu">
+            <button class="menu-row active" data-view="orders">
+              <span class="mr-left">${App.icon('box')} سفارش‌های من</span>${App.icon('chevronLeft')}
+            </button>
+            <button class="menu-row" data-view="profile">
+              <span class="mr-left">${App.icon('user')} ویرایش اطلاعات حساب</span>${App.icon('chevronLeft')}
+            </button>
+            <button class="menu-row danger" data-logout>
+              <span class="mr-left">${App.icon('logout')} خروج از حساب کاربری</span>
+            </button>
+          </nav>
         </aside>
-        <div data-panel></div>
+        <div class="dash-panel" data-panel></div>
       </div>`;
 
     root.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => {

@@ -1,6 +1,6 @@
 /* Cart page — server-authoritative quote (prices recomputed by the API). */
 (function () {
-  App.boot();
+  App.boot({ active: 'cart' });
 
   const root = document.querySelector('[data-cart-root]');
   let coupon = sessionStorage.getItem('mk_coupon') || '';
@@ -63,18 +63,20 @@
     const el = root.querySelector('[data-items]');
     el.innerHTML = items.map((it) => `
       <div class="cart-item">
-        <img src="${App.escapeHtml(it.image_url)}" alt="${App.escapeHtml(it.name)}">
-        <div>
-          <a class="ci-name" href="/product.html?slug=${encodeURIComponent(it.slug)}">${App.escapeHtml(it.name)}</a>
-          <div class="ci-meta">${App.toman(it.unitPrice)} × ${it.quantity}</div>
-          ${it.quantity > it.stock ? `<div class="ci-meta" style="color:var(--danger)">فقط ${it.stock} عدد موجود است</div>` : ''}
-          <button class="remove" data-remove="${it.productId}">حذف</button>
-        </div>
-        <div style="text-align:end">
-          <div class="qty-stepper" style="margin-bottom:8px">
-            <button data-dec="${it.productId}">−</button><span>${it.quantity}</span><button data-inc="${it.productId}">+</button>
+        <div class="ci-media"><img src="${App.escapeHtml(it.image_url)}" alt="${App.escapeHtml(it.name)}"></div>
+        <div class="ci-body">
+          <div class="ci-top">
+            <a class="ci-name" href="/product.html?slug=${encodeURIComponent(it.slug)}">${App.escapeHtml(it.name)}</a>
+            <button class="ci-delete" data-remove="${it.productId}" aria-label="حذف">${App.icon('trash')}</button>
           </div>
-          <strong>${App.toman(it.lineTotal)}</strong>
+          <div class="ci-meta">${App.toman(it.unitPrice)} در هر عدد</div>
+          ${it.quantity > it.stock ? `<div class="ci-meta" style="color:var(--danger)">فقط ${it.stock} عدد موجود است</div>` : ''}
+          <div class="ci-bottom">
+            <div class="qty-stepper">
+              <button data-dec="${it.productId}" aria-label="کاهش">−</button><span>${it.quantity}</span><button data-inc="${it.productId}" aria-label="افزایش">+</button>
+            </div>
+            <span class="ci-price">${App.toman(it.lineTotal)}</span>
+          </div>
         </div>
       </div>`).join('');
 

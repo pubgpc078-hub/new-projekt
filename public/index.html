@@ -38,35 +38,17 @@
   <div data-app-header></div>
 
   <!-- ── Hero ─────────────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="reveal in">
-        <span class="hero-eyebrow">✨ ضمانت اصالت + ارسال رایگان</span>
-        <h1>خانه‌ای <span class="grad">هوشمند و لوکس</span> با منوجان کالا</h1>
-        <p>بهترین برندهای لوازم خانگی دنیا را با قیمت رقابتی، گارانتی معتبر و تجربه خریدی در سطح جهانی تهیه کنید.</p>
-        <div class="hero-cta">
-          <a href="/products.html" class="btn btn-primary btn-lg">مشاهده فروشگاه</a>
-          <a href="/products.html?featured=1" class="btn btn-ghost btn-lg">پیشنهادهای ویژه</a>
-        </div>
-        <div class="hero-stats">
-          <div><div class="num">+۵۰۰</div><div class="lbl">محصول متنوع</div></div>
-          <div><div class="num">+۱۲هزار</div><div class="lbl">مشتری راضی</div></div>
-          <div><div class="num">۲۴ساعته</div><div class="lbl">پشتیبانی</div></div>
-        </div>
+  <div class="container">
+    <section class="hero-banner reveal in">
+      <div class="hero-media"><img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1400&q=80" alt="آشپزخانه مدرن"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>تجربه زندگی مدرن</h1>
+        <p>جدیدترین لوازم خانگی با طراحی مینیمال، کارایی بالا و ضمانت اصالت کالا.</p>
+        <a href="/products.html" class="btn btn-primary">مشاهده محصولات</a>
       </div>
-      <div class="hero-visual reveal in">
-        <div class="hero-card">
-          <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900&q=80" alt="آشپزخانه مدرن">
-          <div class="hc-body">
-            <span class="hc-tag">پرفروش‌ترین این هفته</span>
-            <h3 style="font-size:1.1rem;margin-top:4px">کالکشن آشپزخانه حرفه‌ای</h3>
-          </div>
-        </div>
-        <div class="hero-float f1"><span class="dot">🚚</span><span>ارسال سریع</span></div>
-        <div class="hero-float f2"><span class="dot">🛡️</span><span>۲۴ ماه گارانتی</span></div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <!-- ── Feature strip ────────────────────────────────────────────── -->
   <section class="container section" style="padding-block:40px">
@@ -97,9 +79,9 @@
       <div><h2>محصولات پرفروش</h2><p>انتخاب هوشمند مشتریان ما</p></div>
       <a href="/products.html?trending=1" class="btn btn-ghost btn-sm">مشاهده همه</a>
     </div>
-    <div class="grid product-grid" data-trending>
-      <div class="skeleton sk-card"></div><div class="skeleton sk-card"></div>
-      <div class="skeleton sk-card"></div><div class="skeleton sk-card"></div>
+    <div class="bento" data-trending>
+      <div class="skeleton" style="height:420px"></div>
+      <div class="skeleton" style="height:420px"></div>
     </div>
   </section>
 
@@ -137,6 +119,7 @@
   </section>
 
   <div data-app-footer></div>
+  <div data-app-bottomnav></div>
 
   <script src="/js/api.js"></script>
   <script src="/js/app.js"></script>

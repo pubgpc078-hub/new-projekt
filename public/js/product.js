@@ -1,6 +1,6 @@
 /* Product detail page — gallery, specs, reviews, related, add-to-cart. */
 (function () {
-  App.boot({ active: 'products' });
+  App.boot({ active: 'products', bottomNav: false });
 
   const slug = new URLSearchParams(location.search).get('slug');
   const root = document.querySelector('[data-pdp-root]');
@@ -46,6 +46,10 @@
       <div class="pdp">
         <div class="pdp-gallery">
           <div class="pdp-main-img"><img src="${App.escapeHtml(gallery[0])}" alt="${App.escapeHtml(p.name)}" data-main-img></div>
+          ${gallery.length > 1 ? `
+          <div class="pdp-thumbs">
+            ${gallery.map((g, i) => `<div class="pdp-thumb${i === 0 ? ' active' : ''}" data-thumb="${App.escapeHtml(g)}"><img src="${App.escapeHtml(g)}" alt="${App.escapeHtml(p.name)} ${i + 1}"></div>`).join('')}
+          </div>` : ''}
         </div>
         <div>
           <span class="product-brand">${App.escapeHtml(p.brand || '')}</span>
@@ -61,7 +65,7 @@
             <div class="qty-stepper">
               <button data-qty="-1" aria-label="کاهش">−</button><span data-qty-val>1</span><button data-qty="1" aria-label="افزایش">+</button>
             </div>
-            <button class="btn btn-primary btn-lg" data-add-cart ${inStock ? '' : 'disabled'} style="flex:1">
+            <button class="btn btn-primary btn-lg pdp-add-inline" data-add-cart ${inStock ? '' : 'disabled'} style="flex:1">
               ${inStock ? 'افزودن به سبد خرید' : 'ناموجود'}
             </button>
           </div>
@@ -86,8 +90,14 @@
         <div class="section-head"><h2>محصولات مرتبط</h2></div>
         <div class="grid product-grid">${related.map(App.productCard).join('')}</div>
       </section>` : ''}
+
+      <div class="pdp-sticky-bar">
+        <div class="psb-price"><span>مبلغ قابل پرداخت</span><span data-psb-price>${App.toman(p.price)}</span></div>
+        <button class="btn btn-primary" data-psb-add ${inStock ? '' : 'disabled'}>${App.icon('addCart')} ${inStock ? 'افزودن به سبد' : 'ناموجود'}</button>
+      </div>
     `;
 
+    document.body.classList.add('has-sticky-bar');
     wireGallery(gallery);
     wireQty(p);
     wireTabs();
@@ -95,22 +105,27 @@
     window.dispatchEvent(new Event('content:rendered'));
   }
 
-  function wireGallery(gallery) {
+  function wireGallery() {
     const main = root.querySelector('[data-main-img]');
     root.querySelectorAll('[data-thumb]').forEach((t) =>
-      t.addEventListener('click', () => { main.src = t.dataset.thumb; }));
+      t.addEventListener('click', () => {
+        main.src = t.dataset.thumb;
+        root.querySelectorAll('[data-thumb]').forEach((x) => x.classList.toggle('active', x === t));
+      }));
   }
 
   function wireQty(p) {
     const val = root.querySelector('[data-qty-val]');
+    const psbPrice = root.querySelector('[data-psb-price]');
+    const updateQty = (n) => {
+      quantity = Math.min(Math.max(n, 1), Math.max(p.stock, 1));
+      val.textContent = quantity;
+      if (psbPrice) psbPrice.textContent = App.toman(p.price * quantity);
+    };
     root.querySelectorAll('[data-qty]').forEach((b) =>
-      b.addEventListener('click', () => {
-        quantity = Math.min(Math.max(quantity + parseInt(b.dataset.qty, 10), 1), Math.max(p.stock, 1));
-        val.textContent = quantity;
-      }));
-    root.querySelector('[data-add-cart]').addEventListener('click', () => {
-      App.addToCart(p, quantity);
-    });
+      b.addEventListener('click', () => { updateQty(quantity + parseInt(b.dataset.qty, 10)); }));
+    root.querySelector('[data-add-cart]').addEventListener('click', () => { App.addToCart(p, quantity); });
+    root.querySelector('[data-psb-add]')?.addEventListener('click', () => { App.addToCart(p, quantity); });
   }
 
   function wireTabs() {

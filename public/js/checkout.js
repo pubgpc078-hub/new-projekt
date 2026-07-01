@@ -1,6 +1,6 @@
 /* Checkout — shipping form, server-side quote, and order placement. */
 (function () {
-  App.boot();
+  App.boot({ active: 'cart' });
 
   const root = document.querySelector('[data-checkout-root]');
   const coupon = sessionStorage.getItem('mk_coupon') || '';

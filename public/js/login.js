@@ -1,6 +1,6 @@
 /* Login / register page logic (external file to satisfy strict CSP). */
 (function () {
-  App.boot();
+  App.boot({ active: 'profile' });
   // If already authenticated, bounce to the right place.
   App.loadUser().then((u) => { if (u) location.href = u.role === 'admin' ? '/admin.html' : '/dashboard.html'; });
 
